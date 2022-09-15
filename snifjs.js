@@ -92,7 +92,7 @@ server.on('message', async (msg, senderInfo) => {
   data.Longitud= mensaje[0]
   data.Latitud = mensaje[1]
   data.Fecha = mensaje[2]
-  data.Hora = mensaje[3]
+  data.Hora = mensaje[4]
   console.log(mensaje)
   insertData(data.Longitud,data.Latitud, data.Fecha,data.Hora);
   server.send(msg, senderInfo.port, senderInfo.address, () => {
