@@ -28,10 +28,10 @@ connection.connect(function (err){
 
 
 
-const insertData = async (Longitud, Latidud, Fecha, Hora) => {
+const insertData = async (Longitud, Latitud, Fecha, Hora) => {
   const dateComplete = Fecha + " " + Hora;  
 
-  const query = `INSERT INTO disen ('"+Longitud+"', '"+Latitud+"', '"+Fecha+"', '"+Hora+"') VALUES (Longitud, Latidud, Fecha, Hora)`;
+  const query = `INSERT INTO disen (Longitud, Latidud, Fecha, Hora) VALUES ('"+Longitud+"', '"+Latitud+"', '"+Fecha+"', '"+Hora+"')`;
 
   console.log(dateComplete)
   connection.query(query, function(err, result){
