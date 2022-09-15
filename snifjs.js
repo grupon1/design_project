@@ -88,8 +88,7 @@ server.on('message', async (msg, senderInfo) => {
   data.Latitud = mensaje[2]
   data.Fecha = mensaje[3]
   data.Hora = mensaje[4]
-  //console.table(data)
-  //insertData(data.Longitud,data.Latitud, data.Fecha,data.Hora);
+  insertData(data.Longitud, data.Latitud, data.Fecha, data.Hora)
   server.send(msg, senderInfo.port, senderInfo.address, () => {
     console.log(`Message sent to ${senderInfo.address}:${senderInfo.port}`)
   })
@@ -99,6 +98,5 @@ server.on('listening', (req, res) => {
   console.log(`UDP server listening on: ${address.address}:${address.port}`);
 });
 
-//xdxdxd
 server.bind(3000);
 app.listen(9001, () => console.log('Server on port: 9001'));
