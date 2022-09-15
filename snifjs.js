@@ -30,7 +30,7 @@ let arrayFecha=["","",""];
 let arrayHora=["","",""];
 
 const insertData = async (Longitud, Latitud, Fecha, Hora) => {
-  arrayFecha=Fecha.split("/");
+  arrayFecha=Fecha.split("-");
   var Year=arrayFecha[2];
   var Month=arrayFecha[1];
   var Day=arrayFecha[0];
