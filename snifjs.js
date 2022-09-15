@@ -36,7 +36,7 @@ else{
 const insertData = async (Longitud, Latidud, Fecha, Hora) => {
   
 
-  const query = `INSERT INTO disen (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latidud}, ${Fecha}, ${Hora})`;
+  const query = `INSERT INTO disen (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latidud}, "${Fecha}", "${Hora}")`;
 
   
   connection.query(query, function(err, result){
