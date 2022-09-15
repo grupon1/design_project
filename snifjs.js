@@ -31,7 +31,7 @@ connection.connect(function (err){
 const insertData = async (Longitud, Latidud, Fecha, Hora) => {
   
 
-  const query = `INSERT INTO disen (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latidud}, "${Fecha}, "${Hora})"`;
+  const query = `INSERT INTO design.disen (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latidud}, "${Fecha}, "${Hora})"`;
 
   
   connection.query(query, function(err, result){
@@ -53,13 +53,13 @@ app.get("/", (req, res) => {
 
 
 //const getRecordInfo = async (Fecha1,Fecha2) => {
-//const query = `SELECT * FROM disen WHERE date BETWEEN ${Fecha1} AND ${Fecha2}`;
-//const {rows:[{Longitud,Latidud,Fecha, Hora}]} = await connection.query(query);
-  //return {Longitud,Latidud,Fecha, Hora}
+//const query = `SELECT * FROM design.disen WHERE date BETWEEN ${Fecha1} AND ${Fecha2}`;
+//const {rows:[{Longitud, Latidud, Fecha, Hora}]} = await connection.query(query);
+  //return {Longitud, Latidud, Fecha, Hora}
 
 //};
 app.get("/data", async (req, res) => {
-  const query = `SELECT * FROM Datagps ORDER BY ID DESC LIMIT 1`;
+  const query = `SELECT * FROM design.disen ORDER BY ID DESC LIMIT 1`;
   connection.query(query,(err,result) => {
     if (!err) {
       return res.send(result).status(200);     
