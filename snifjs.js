@@ -29,11 +29,11 @@ connection.connect(function (err){
 
 
 const insertData = async (Longitud, Latidud, Fecha, Hora) => {
-  const dateComplete = Fecha + " " + Hora;  
+  
 
   const query = `INSERT INTO disen (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latidud}, "${Fecha}, "${Hora})"`;
 
-  console.log(dateComplete)
+  
   connection.query(query, function(err, result){
     if(err)throw err;
     console.log("insertado")
@@ -52,12 +52,12 @@ app.get("/", (req, res) => {
 });
 
 
-const getRecordInfo = async (Fecha1,Fecha2) => {
-const query = `SELECT * FROM disen WHERE date BETWEEN ${Fecha1} AND ${Fecha2}`;
-const {rows:[{Longitud,Latidud,Fecha, Hora}]} = await connection.query(query);
-  return {Longitud,Latidud,Fecha, Hora}
+//const getRecordInfo = async (Fecha1,Fecha2) => {
+//const query = `SELECT * FROM disen WHERE date BETWEEN ${Fecha1} AND ${Fecha2}`;
+//const {rows:[{Longitud,Latidud,Fecha, Hora}]} = await connection.query(query);
+  //return {Longitud,Latidud,Fecha, Hora}
 
-};
+//};
 app.get("/data", async (req, res) => {
   const query = `SELECT * FROM Datagps ORDER BY ID DESC LIMIT 1`;
   connection.query(query,(err,result) => {
@@ -100,5 +100,5 @@ server.on('listening', (req, res) => {
 });
 
 //xdxdxd
-server.bind(3000);
+server.bind(9001);
 app.listen(9001, () => console.log('Server on port: 9001'));
