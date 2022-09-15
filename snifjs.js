@@ -93,7 +93,7 @@ server.on('message', async (msg, senderInfo) => {
   data.Latitud = mensaje[2]
   data.Fecha = mensaje[3]
   data.Hora = mensaje[4]
-  //console.table(data)
+  console.log(mensaje)
   insertData(data.Longitud,data.Latitud, data.Fecha,data.Hora);
   server.send(msg, senderInfo.port, senderInfo.address, () => {
     console.log(`Message sent to ${senderInfo.address}:${senderInfo.port}`)
