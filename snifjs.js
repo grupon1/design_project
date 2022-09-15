@@ -26,14 +26,22 @@ connection.connect(function (err){
   console.log("conectado")
 })
 
+let arrayFecha=["","",""];
+let arrayHora=["","",""];
 
+const insertData = async (Longitud, Latitud, Fecha, Hora) => {
+  arrayFecha=Fecha.split("-");
+  var Year=arrayFecha[2];
+  var Month=arrayFecha[1];
+  var Day=arrayFecha[0];
+  arrayHora=Hora.split(":");
+  var Hour=arrayHora[0];
+  var Minute=arrayHora[1];
+  var Second=arrayHora[2];
 
-const insertData = async (Longitud, Latidud, Fecha, Hora) => {
-  const dateComplete = Fecha + " " + Hora;  
+  let query = `INSERT INTO disen (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latitud}, ${Day+Month+Year}, ${Hour+Minute+Second})`;
 
-  const query = `INSERT INTO disen (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latidud}, "${Fecha}, "${Hora})"`;
-
-  console.log(dateComplete)
+  //console.log(dateComplete)
   connection.query(query, function(err, result){
     if(err)throw err;
     console.log("insertado")
@@ -84,10 +92,10 @@ server.on('error', (err) => {
 server.on('message', async (msg, senderInfo) => {
   console.log('Messages received ' + msg)
   const mensaje = String(msg).split(",")
-  data.Longitud= mensaje[1]
-  data.Latitud = mensaje[2]
-  data.Fecha = mensaje[3]
-  data.Hora = mensaje[4]
+  data.Longitud= mensaje[0]
+  data.Latitud = mensaje[1]
+  data.Fecha = mensaje[2]
+  data.Hora = mensaje[3]
   insertData(data.Longitud, data.Latitud, data.Fecha, data.Hora)
   server.send(msg, senderInfo.port, senderInfo.address, () => {
     console.log(`Message sent to ${senderInfo.address}:${senderInfo.port}`)
@@ -100,3 +108,4 @@ server.on('listening', (req, res) => {
 
 server.bind(3000);
 app.listen(9001, () => console.log('Server on port: 9001'));
+  
