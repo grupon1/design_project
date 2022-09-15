@@ -88,7 +88,7 @@ server.on('error', (err) => {
 });
 server.on('message', async (msg, senderInfo) => {
   console.log('Messages received ' + msg)
-  const mensaje = String(msg).split(",")
+  const mensaje = String(msg).split(" ")
   data.Longitud= mensaje[1]
   data.Latitud = mensaje[2]
   data.Fecha = mensaje[3]
