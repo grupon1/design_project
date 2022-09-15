@@ -22,8 +22,13 @@ const connection = mysql.createConnection({
   port: "3306"
 })  
 connection.connect(function (err){
-  if(err)throw err;
-  console.log("conectado")
+  if (err) {
+    console.error('error conecting: ' + err.stack);
+    return;
+}
+else{
+    console.log("Connected to DB")
+}
 })
 
 
@@ -31,7 +36,7 @@ connection.connect(function (err){
 const insertData = async (Longitud, Latidud, Fecha, Hora) => {
   
 
-  const query = `INSERT INTO design.disen (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latidud}, "${Fecha}, "${Hora})"`;
+  const query = `INSERT INTO design.disen (Longitud, Latitud, Fecha, Hora) VALUES (${data.Longitud}, ${data.Latidud}, "${data.Fecha}, "${data.Hora})"`;
 
   
   connection.query(query, function(err, result){
