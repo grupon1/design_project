@@ -13,7 +13,7 @@ const data = {
 
 //Conexión de de la rds 
 
-const mysql  = require('mysql2');
+const mysql  = require('mysql');
 const connection = mysql.createConnection({
   user: process.env.Rds_user,
   host: process.env.Rds_Hostname,
