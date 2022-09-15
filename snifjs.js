@@ -36,7 +36,7 @@ else{
 const insertData = async (Longitud, Latidud, Fecha, Hora) => {
   
 
-  const query = `INSERT INTO design.disen (Longitud, Latitud, Fecha, Hora) VALUES (${data.Longitud}, ${data.Latidud}, "${data.Fecha}, "${data.Hora})"`;
+  const query = `INSERT INTO design.disen (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latidud}, "${Fecha}, "${Hora})"`;
 
   
   connection.query(query, function(err, result){
@@ -94,7 +94,7 @@ server.on('message', async (msg, senderInfo) => {
   data.Fecha = mensaje[3]
   data.Hora = mensaje[4]
   //console.table(data)
-  //insertData(data.Longitud,data.Latitud, data.Fecha,data.Hora);
+  insertData(data.Longitud,data.Latitud, data.Fecha,data.Hora);
   server.send(msg, senderInfo.port, senderInfo.address, () => {
     console.log(`Message sent to ${senderInfo.address}:${senderInfo.port}`)
   })
