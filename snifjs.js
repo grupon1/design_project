@@ -15,10 +15,10 @@ const data = {
 
 const mysql  = require('mysql2');
 const connection = mysql.createConnection({
-  user: process.env.user,
-  host: process.env.Hostname,
-  database: process.env.DB,
-  password: process.env.Pass,
+  user: process.env.Rds_user,
+  host: process.env.Rds_Hostname,
+  database: process.env.Rds_DB,
+  password: process.env.Rds_Pass,
   port: "3306"
 })  
 connection.connect(function (err){
@@ -97,5 +97,5 @@ server.on('listening', (req, res) => {
 });
 
 //xdxdxd
-server.bind(3000);
-app.listen(9001, () => console.log('Server on port: 9001'));
+server.bind(9001);
+app.listen(80, () => console.log('Server on port: 9001'));
