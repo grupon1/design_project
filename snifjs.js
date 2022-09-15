@@ -30,11 +30,9 @@ connection.connect(function (err){
 
 const insertData = async (Longitud, Latidud, Fecha, Hora) => {
   const dateComplete = Fecha + " " + Hora;  
-<<<<<<< HEAD
+
   const query = `INSERT INTO disen (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latidud}, "${Fecha}, "${Hora})"`;
-=======
-  const query = `INSERT INTO Datagps (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latidud}, "${dateComplete}")`;
->>>>>>> f90b80ab98190c89e9e9e97b3299ea16dee7e790
+
   console.log(dateComplete)
   connection.query(query, function(err, result){
     if(err)throw err;
@@ -55,15 +53,10 @@ app.get("/", (req, res) => {
 
 
 const getRecordInfo = async (Fecha1,Fecha2) => {
-<<<<<<< HEAD
-  const query = `SELECT * FROM disen WHERE date BETWEEN ${Fecha1} AND ${Fecha2}`;
-  const {rows:[{Longitud,Latidud,Fecha, Hora}]} = await connection.query(query);
+const query = `SELECT * FROM disen WHERE date BETWEEN ${Fecha1} AND ${Fecha2}`;
+const {rows:[{Longitud,Latidud,Fecha, Hora}]} = await connection.query(query);
   return {Longitud,Latidud,Fecha, Hora}
-=======
-  const query = `SELECT * FROM Datagps WHERE date BETWEEN ${Fecha1} AND ${Fecha2}`;
-  const {rows:[{Longitud,Latidud,Fecha}]} = await connection.query(query);
-  return {Longitud,Latidud,Fecha}
->>>>>>> f90b80ab98190c89e9e9e97b3299ea16dee7e790
+
 };
 app.get("/data", async (req, res) => {
   const query = `SELECT * FROM Datagps ORDER BY ID DESC LIMIT 1`;
