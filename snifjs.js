@@ -39,7 +39,7 @@ const insertData = async (Longitud, Latitud, Fecha, Hora) => {
   var Minute=arrayHora[1];
   var Second=arrayHora[2];
 
-  let query = `INSERT INTO disen (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latitud}, ${Year+Month+Day}, ${Hour+Minute+Second})`;
+  let query = `INSERT INTO disen (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latitud}, ${Day+Month+Year}, ${Hour+Minute+Second})`;
 
   //console.log(dateComplete)
   connection.query(query, function(err, result){
