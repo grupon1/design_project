@@ -30,7 +30,7 @@ connection.connect(function (err){
 
 const insertData = async (Longitud, Latidud, Fecha, Hora) => {
   const dateComplete = Fecha + " " + Hora;  
-  const query = `INSERT INTO disen (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latidud}, "${dateComplete}")`;
+  const query = `INSERT INTO disen (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latidud}, "${Fecha}, "${Hora})"`;
   console.log(dateComplete)
   connection.query(query, function(err, result){
     if(err)throw err;
@@ -52,8 +52,8 @@ app.get("/", (req, res) => {
 
 const getRecordInfo = async (Fecha1,Fecha2) => {
   const query = `SELECT * FROM disen WHERE date BETWEEN ${Fecha1} AND ${Fecha2}`;
-  const {rows:[{Longitud,Latidud,Fecha}]} = await connection.query(query);
-  return {Longitud,Latidud,Fecha}
+  const {rows:[{Longitud,Latidud,Fecha, Hora}]} = await connection.query(query);
+  return {Longitud,Latidud,Fecha, Hora}
 };
 app.get("/data", async (req, res) => {
   const query = `SELECT * FROM disen ORDER BY ID DESC LIMIT 1`;
@@ -81,10 +81,10 @@ server.on('error', (err) => {
 server.on('message', async (msg, senderInfo) => {
   console.log('Messages received ' + msg)
   const mensaje = String(msg).split(",")
-  data.Longitud= mensaje[0]
-  data.Latitud = mensaje[1]
-  data.Fecha = mensaje[2]
-  data.Hora = mensaje[3]
+  data.Longitud= mensaje[1]
+  data.Latitud = mensaje[2]
+  data.Fecha = mensaje[3]
+  data.Hora = mensaje[4]
   //console.table(data)
   //insertData(data.Longitud,data.Latitud, data.Fecha,data.Hora);
   server.send(msg, senderInfo.port, senderInfo.address, () => {
