@@ -26,12 +26,20 @@ connection.connect(function (err){
   console.log("conectado")
 })
 
-
+let arrayFecha=["","",""];
+let arrayHora=["","",""];
 
 const insertData = async (Longitud, Latitud, Fecha, Hora) => {
-  const dateComplete = Fecha + " " + Hora;  
+  arrayFecha=Fecha.split("-");
+  var Year=arrayFecha[0];
+  var Month=arrayFecha[1];
+  var Day=arrayFecha[2];
+  arrayHora=Hora.split(":");
+  var Hour=arrayHora[0];
+  var Minute=arrayHora[1];
+  var Second=arrayHora[2];
 
-  let query = `INSERT INTO disen (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latitud}, ${Fecha}, ${Hora})`;
+  let query = `INSERT INTO disen (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latitud}, ${Year+Month+Day}, ${Hour+Minute+Second})`;
 
   console.log(dateComplete)
   connection.query(query, function(err, result){
