@@ -64,7 +64,7 @@ const {rows:[{Longitud, Latidud, Fecha, Hora}]} = await connection.query(query);
 
 };
 app.get("/data", async (req, res) => {
-  const query = `SELECT * FROM Datagps ORDER BY ID DESC LIMIT 1`;
+  const query = `SELECT * FROM  Datagps ORDER BY ID DESC LIMIT 1`;
   connection.query(query,(err,result) => {
     if (!err) {
       return res.send(result).status(200);     
@@ -104,6 +104,6 @@ server.on('listening', (req, res) => {
   console.log(`UDP server listening on: ${address.address}:${address.port}`);
 });
 
-//xdxdxdxdxd
+//xdxdxdxd
 server.bind(9001);
 app.listen(9001, () => console.log('Server on port: 9001'));
