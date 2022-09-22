@@ -86,12 +86,13 @@ app.get("/record", async (req, res) => {
   ifecha = new FechaID(ifecha), ffecha = new FechaID(ffecha)
   ifecha = moment(ifecha).format('DD:MM:YYYY HH:mm:ss')
   ffecha = moment(ffecha).format('DD:MM:YYYY HH:mm:ss')
-  query =  `SELECT * FROM disen WHERE date BETWEEN ${ifecha} AND ${ffecha}`
+  query =  `SELECT * FROM disen WHERE Fecha BETWEEN ${ifecha} AND ${ffecha}`
   response = await new Promise((resolve, reject)=>{
     connection.query(query,(e,d)=>{
       if(e)throw e
           else{console.log(query,d)
               resolve(d)
+              console.log("success")
           }
       })
   })
