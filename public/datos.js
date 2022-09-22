@@ -1,35 +1,22 @@
-const LatitudID = document.getElementById('LatitudID');
-const LongitudID = document.getElementById('LongitudID');
-const FechaID = document.getElementById('FechaID');
-const HoraID = document.getElementById('HoraID');
-const polylineCoords = [];
-const polyline = L.polyline([[0,0]],{color:'red',opacity:1}).addTo(map);
-const marcador = L.marker([0, 0]).addTo(map);
+ // Usamos selector para asignar el valor de la fila en un id
+ 
+ Latitud = document.getElementById('Latitud')
+ Longitud = document.getElementById('Longitud')
+ Fecha = document.getElementById('Fecha')
+ Hora = document.getElementById('Hora')  
 
-const showData = async () => {
-    const url = window.location;
-    const link = url + "data";
-    fetch(link, {
-        method: 'GET',
-        headers: {
-            Accept: 'application/json',
-        },
-    },
-    ).then(response => {
-        if (response.ok) {
-            response.json().then(json => {
-                const lastInfo = json[0];
-                latID.textContent = lastInfo.lat;
-                longID.textContent = lastInfo.lng;
-                dateID.textContent = lastInfo.date.split('T').join(' ').split('.')[0];
-                marcador.setLatLng([lastInfo.lat,lastInfo.lng])
-                polylineCoords.push([lastInfo.lat,lastInfo.lng])
-                polyline.setLatLngs(polylineCoords);
-            });
-        }
-    });
-};
-showData();
-const timer = setInterval(() => {
-    showData();
+
+ // crea un long polling para simular un socket y pedir los datos periodicamente con un intervalos de 5seg
+setInterval(() => {
+   fetch('Conexion.php')    // llamado al archivo de .php para obtener los valores de la base de datos en MySQL
+  .then(response => response.json())  // convierte la promesa del dato de fetch() a JSON
+  .then(data => {                      // manejo de los datos obtenidos por el fetch 
+    console.log(data)
+   
+    Latitud.innerHTML = data.Latitud
+    Longitud.innerHTML = data.Longitud
+    Fecha.innerHTML = data.Fecha
+    Hora.innerHTML = data.Hora
+});
 }, 5000);
+

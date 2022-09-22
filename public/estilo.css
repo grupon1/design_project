@@ -1,9 +1,5 @@
 div {
-<<<<<<< HEAD
     margin-bottom: 20px;
-=======
-    margin-bottom: 22px;
->>>>>>> 4e23f439362a6098245d26867296f8b7f7ffd1e1
     text-align: justify;
 }
 
@@ -20,17 +16,9 @@ header {
 .labelHome {
     margin-left: 20px;
     border: 1px outset black;
-<<<<<<< HEAD
     width: 200px;
 }
 
 #map { 
     height: 430px; 
-=======
-    width: 220px;
-}
-
-#map { 
-    height: 450px; 
->>>>>>> 4e23f439362a6098245d26867296f8b7f7ffd1e1
 }
