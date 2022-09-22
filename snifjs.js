@@ -31,10 +31,10 @@ else{
 }
 })
 
-const insertData = async (Longitud, Latidud, Fecha, Hora) => {
+const insertData = async (Longitud, Latitud, Fecha, Hora) => {
   
 
-  const query = `INSERT INTO disen (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latidud}, "${Fecha}", "${Hora}")`;
+  const query = `INSERT INTO disen (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latitud}, "${Fecha}", "${Hora}")`;
 
   
   connection.query(query, function(err, result){
@@ -57,8 +57,8 @@ app.get("/", (req, res) => {
 
 const getRecordInfo = async (Fecha1,Fecha2) => {
 const query = `SELECT * FROM disen WHERE date BETWEEN ${Fecha1} AND ${Fecha2}`;
-const {rows:[{Longitud, Latidud, Fecha, Hora}]} = await connection.query(query);
-  return {Longitud, Latidud, Fecha, Hora}
+const {rows:[{Longitud, Latitud, Fecha, Hora}]} = await connection.query(query);
+  return {Longitud, Latitud, Fecha, Hora}
 
 };
 app.get("/data", async (req, res) => {
