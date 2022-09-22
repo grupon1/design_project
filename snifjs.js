@@ -2,7 +2,6 @@ const express = require("express");
 const path = require("path");
 require('dotenv').config();
 
-
 const data = {
   Longitud: "",
   Latitud: "",
@@ -11,7 +10,7 @@ const data = {
   
 }
 
-//Conexión db
+//Conexión dbbb
 
   const mysql  = require('mysql');
   const connection = mysql.createConnection({
