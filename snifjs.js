@@ -86,7 +86,7 @@ app.get("/record", async (req, res) => {
   ifecha = new Date(ifecha), ffecha = new Date(ffecha)
   ifecha = moment(ifecha).format('YYYY:MM:DD')
   ffecha = moment(ffecha).format('YYYY:MM:DD')
-  query =  `SELECT * FROM disen WHERE Fecha BETWEEN ${ifecha} AND ${ffecha}`
+  query =  `SELECT * FROM Datagps WHERE Fecha BETWEEN ${ifecha} AND ${ffecha}`
   response = await new Promise((resolve, reject)=>{
     connection.query(query,(e,d)=>{
       if(e)throw e
@@ -125,6 +125,6 @@ server.on('listening', (req, res) => {
   console.log(`UDP server listening on: ${address.address}:${address.port}`);
 });
 
-//xdxdxd
+//xdxdxdxdxd
 server.bind(9001);
 app.listen(9001, () => console.log('Server on port: 9001'));
