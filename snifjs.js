@@ -11,7 +11,7 @@ const data = {
   
 }
 
-//Conexión rcn
+//Conexión db
 
   const mysql  = require('mysql');
   const connection = mysql.createConnection({
