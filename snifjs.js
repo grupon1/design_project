@@ -11,7 +11,7 @@ const data = {
   
 }
 
-//Conexión de de la rds 
+//Conexión de la rds 
 
 const mysql  = require('mysql2');
 const connection = mysql.createConnection({
