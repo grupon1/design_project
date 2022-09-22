@@ -70,6 +70,7 @@ app.get("/data", async (req, res) => {
   connection.query(query,(err,result) => {
     if (!err) {
       return res.send(result).status(200);     
+      console.log(result);
     } else {
         console.log(`Ha ocurrido el siguiente ${err}`);
         return res.status(500);
