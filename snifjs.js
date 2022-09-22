@@ -84,8 +84,8 @@ app.get("/record", async (req, res) => {
  app.post('/historicos'), async (req, res) => {
   let ifecha = req.body.finicial, ffecha = req.body.ffinal
   ifecha = new Date(ifecha), ffecha = new Date(ffecha)
-  ifecha = moment(ifecha).format('DD:MM:YYYY ')
-  ffecha = moment(ffecha).format('DD:MM:YYYY ')
+  ifecha = moment(ifecha).format('YYYY:MM:DD')
+  ffecha = moment(ffecha).format('YYYY:MM:DD')
   query =  `SELECT * FROM disen WHERE Fecha BETWEEN ${ifecha} AND ${ffecha}`
   response = await new Promise((resolve, reject)=>{
     connection.query(query,(e,d)=>{
