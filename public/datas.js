@@ -21,8 +21,8 @@ const showData = async () => {
                 const lastInfo = json[0];
                 latID.textContent = lastInfo.Latitud;
                 longID.textContent = lastInfo.Longitud;
-                dateID.textContent = lastInfo.date;
-                timeID.textContent = lastInfo.time;
+                dateID.textContent = lastInfo.Fecha;
+                timeID.textContent = lastInfo.Hora;
                 marcador.setLatLng([lastInfo.Latitud,lastInfo.Longitud])
                 polylineCoords.push([lastInfo.Latitud,lastInfo.Longitud])
                 polyline.setLatLngs(polylineCoords);
