@@ -109,8 +109,8 @@ server.on('error', (err) => {
 server.on('message', async (msg, senderInfo) => {
   console.log('Messages received ' + msg)
   const mensaje = String(msg).split(" ")
-  data.Longitud= mensaje[0]
-  data.Latitud = mensaje[1]
+  data.Longitud= mensaje[1]
+  data.Latitud = mensaje[0]
   data.Fecha = mensaje[2]
   data.Hora = mensaje[4]
   console.log(mensaje)
