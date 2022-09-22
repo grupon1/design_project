@@ -81,7 +81,7 @@ app.get("/record", async (req, res) => {
   const info = await getLastLocation()
   res.send(info).status(200); 
 });
- app.post('/Historicos'), async (req, res) => {
+ app.post('/historicos'), async (req, res) => {
   let ifecha = req.body.finicial, ffecha = req.body.ffinal
   ifecha = new FechaID(ifecha), ffecha = new FechaID(ffecha)
   ifecha = moment(ifecha).format('DD:MM:YYYY HH:mm:ss')
