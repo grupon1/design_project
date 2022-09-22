@@ -1,8 +1,8 @@
-const Latitud = document.getElementById('Latitud');
-const Longitud = document.getElementById('Longitud');
-const Fecha = document.getElementById('Fecha');
-const Hora = document.getElementById('Hora');
-const polylineCoords = [];
+const latID = document.getElementById('latID');
+const longID = document.getElementById('longID');
+const dateID = document.getElementById('dateID');
+const timeID = document.getElementById('timeID');
+const polylineCoords =  [];
 const polyline = L.polyline([[0,0]],{color:'red',opacity:1}).addTo(map);
 const marcador = L.marker([0, 0]).addTo(map);
 
@@ -19,9 +19,10 @@ const showData = async () => {
         if (response.ok) {
             response.json().then(json => {
                 const lastInfo = json[0];
-                Latitud.textContent = lastInfo.Latitud;
-                Longitud.textContent = lastInfo.Longitud;
-                Fecha.textContent = lastInfo.date.split('T').join(' ').split('.')[0];
+                latID.textContent = lastInfo.Latitud;
+                longID.textContent = lastInfo.Longitud;
+                dateID.textContent = lastInfo.date;
+                timeID.textContent = lastInfo.time;
                 marcador.setLatLng([lastInfo.Latitud,lastInfo.Longitud])
                 polylineCoords.push([lastInfo.Latitud,lastInfo.Longitud])
                 polyline.setLatLngs(polylineCoords);
