@@ -34,10 +34,10 @@ else{
 
 
 
-const insertData = async (Longitud, Latidud, Fecha, Hora) => {
+const insertData = async (Longitud, Latitud, Fecha, Hora) => {
   
 
-  const query = `INSERT INTO disen (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latidud}, "${Fecha}", "${Hora}")`;
+  const query = `INSERT INTO disen (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latitud}, "${Fecha}", "${Hora}")`;
   console.log(Complete)
   
   connection.query(query, function(err, result){
@@ -60,8 +60,8 @@ app.get("/", (req, res) => {
 
 const getRecordInfo = async (Fecha1,Fecha2) => {
 const query = `SELECT * FROM disen WHERE date BETWEEN ${Fecha1} AND ${Fecha2}`;
-const {rows:[{Longitud, Latidud, Fecha, Hora}]} = await connection.query(query);
-  return {Longitud, Latidud, Fecha, Hora}
+const {rows:[{Longitud, Latitud, Fecha, Hora}]} = await connection.query(query);
+  return {Longitud, Latitud, Fecha, Hora}
 
 };
 app.get("/data", async (req, res) => {
@@ -122,6 +122,6 @@ server.on('listening', (req, res) => {
   console.log(`UDP server listening on: ${address.address}:${address.port}`);
 });
 
-//xdxdxdxdxdxdxdxdxd
+//xd
 server.bind(9001);
 app.listen(9001, () => console.log('Server on port: 9001'));
