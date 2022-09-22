@@ -55,6 +55,7 @@ app.get("/", (req, res) => {
   //res.send("hello world!");
   console.log(process.env.Rds_DB);
   res.sendFile(path.join(__dirname + "/index.html"));
+  console.log("enviado a pagina web";
 });
 
 
