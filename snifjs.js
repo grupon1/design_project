@@ -122,11 +122,6 @@ server.on('listening', (req, res) => {
   console.log(`UDP server listening on: ${address.address}:${address.port}`);
 });
 
-<<<<<<< HEAD
-//xdxdxdxdxdxdxdxd
-//xdxdxdxd
-=======
 //xdxdxdxdxdxdxdxdxd
->>>>>>> 50c9dd4f249c2a8f215b1c18237a04be709a8543
 server.bind(9001);
 app.listen(9001, () => console.log('Server on port: 9001'));
