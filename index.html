@@ -4,32 +4,43 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>GPS</title>
+        <title>CamionLocation</title>
         <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
         integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
         crossorigin=""/>
-        <link rel="stylesheet" href="./style.css">
+        <link rel="stylesheet" href="estilo.css">
     </head>
     <body>
-        <div>
-            <header style="text-align: center;"><i><b>GPS</b></i></header>
-        </div>
-        <div><label>Latitud </label>
-            <label id="latID" class="labelHome"></label>
-        </div>
 
         <div>
-            <label>Longitud</label>
-            <label id="longID" class="labelHome"></label>
+            <header style="text-align: center;"><i><b>Camion Location</b></i></header>
         </div>
+        <div>
+            <a href="/data">Ultima localización</a> 
+            </div>
 
-        <div><label>Fecha</label>
-            <label id="dateID" class="labelHome"></label>
-        </div>
+        <div>
+            <a href="/historico.html">Historicos</a> 
+            </div>
 
-
-        <div><label>Hora</label>
-            <label id="timeID" class="labelHome"></label>
+            <div><label>Latitud </label>
+                <label id="latID" class="labelHome"></label>
+            </div>
+    
+            <div>
+                <label>Longitud</label>
+                <label id="longID" class="labelHome"></label>
+            </div>
+    
+            <div><label>Fecha</label>
+                <label id="dateID" class="labelHome"></label>
+            </div>
+    
+    
+            <div><label>Hora</label>
+                <label id="timeID" class="labelHome"></label>
+            </div>
+    
         </div>
 
         <div id="map"></div>
@@ -38,7 +49,7 @@
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
         <script>
-            const map = L.map('map').setView([10.976029412029105, -74.80355101913315], 12);
+            const map = L.map('map').setView([11, -74.80355101913315], 12);
             L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
                 maxZoom: 18,
@@ -49,6 +60,6 @@
             }).addTo(map);
                       
         </script>
-        <script src="./showInfo.js"></script>
+        <script src="datas.js"></script>
     </body>
 </html>

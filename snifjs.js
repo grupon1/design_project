@@ -1,5 +1,6 @@
 const express = require("express");
 const path = require("path");
+const moment = require("moment");
 require('dotenv').config();
 
 
@@ -33,11 +34,11 @@ else{
 
 
 
-const insertData = async (Longitud, Latidud, Fecha, Hora) => {
+const insertData = async (Longitud, Latitud, Fecha, Hora) => {
   
 
-  const query = `INSERT INTO Datagps (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latidud}, "${Fecha}", "${Hora}")`;
-
+  const query = `INSERT INTO disen (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latitud}, "${Fecha}", "${Hora}")`;
+  console.log("Complete")
   
   connection.query(query, function(err, result){
     if(err)throw err;
@@ -52,22 +53,24 @@ app.use(express.static(__dirname + '/public'));
 
 app.get("/", (req, res) => {
   //res.send("hello world!");
-  console.log(process.env.design);
+  console.log(process.env.Rds_DB);
   res.sendFile(path.join(__dirname + "/index.html"));
+  console.log("enviado a pagina web");
 });
 
 
 const getRecordInfo = async (Fecha1,Fecha2) => {
-const query = `SELECT * FROM Datagps WHERE date BETWEEN ${Fecha1} AND ${Fecha2}`;
-const {rows:[{Longitud, Latidud, Fecha, Hora}]} = await connection.query(query);
-  return {Longitud, Latidud, Fecha, Hora}
+const query = `SELECT * FROM disen WHERE date BETWEEN ${Fecha1} AND ${Fecha2}`;
+const {rows:[{Longitud, Latitud, Fecha, Hora}]} = await connection.query(query);
+  return {Longitud, Latitud, Fecha, Hora}
 
 };
 app.get("/data", async (req, res) => {
-  const query = `SELECT * FROM Datagps ORDER BY ID DESC LIMIT 1`;
+  const query = `SELECT * FROM disen ORDER BY ID DESC LIMIT 1`;
   connection.query(query,(err,result) => {
     if (!err) {
       return res.send(result).status(200);     
+      console.log(result);
     } else {
         console.log(`Ha ocurrido el siguiente ${err}`);
         return res.status(500);
@@ -78,7 +81,25 @@ app.get("/record", async (req, res) => {
   const info = await getLastLocation()
   res.send(info).status(200); 
 });
-
+ app.post('/historicos'), async (req, res) => {
+  let ifecha = req.body.finicial, ffecha = req.body.ffinal
+  ifecha = new Date(ifecha), ffecha = new Date(ffecha)
+  ifecha = moment(ifecha).format('DD:MM:YYYY ')
+  ffecha = moment(ffecha).format('DD:MM:YYYY ')
+  query =  `SELECT * FROM disen WHERE Fecha BETWEEN ${ifecha} AND ${ffecha}`
+  response = await new Promise((resolve, reject)=>{
+    connection.query(query,(e,d)=>{
+      if(e)throw e
+          else{console.log(query,d)
+              resolve(d)
+              console.log("success")
+          }
+      })
+  })
+  res.status(200).json({
+      response
+  })
+ }
 const dgram = require('dgram');
 const { Hora } = require("console");
 const server = dgram.createSocket('udp4');
@@ -89,8 +110,8 @@ server.on('error', (err) => {
 server.on('message', async (msg, senderInfo) => {
   console.log('Messages received ' + msg)
   const mensaje = String(msg).split(" ")
-  data.Longitud= mensaje[0]
-  data.Latitud = mensaje[1]
+  data.Longitud= mensaje[1]
+  data.Latitud = mensaje[0]
   data.Fecha = mensaje[2]
   data.Hora = mensaje[4]
   console.log(mensaje)
@@ -104,6 +125,6 @@ server.on('listening', (req, res) => {
   console.log(`UDP server listening on: ${address.address}:${address.port}`);
 });
 
-//xdxdxdxdxdxdxdxd
+//xd
 server.bind(9001);
 app.listen(9001, () => console.log('Server on port: 9001'));
