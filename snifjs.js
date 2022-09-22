@@ -1,6 +1,5 @@
 const express = require("express");
 const path = require("path");
-const moment = require("moment");
 require('dotenv').config();
 
 
@@ -34,11 +33,11 @@ else{
 
 
 
-const insertData = async (Longitud, Latitud, Fecha, Hora) => {
+const insertData = async (Longitud, Latidud, Fecha, Hora) => {
   
 
-  const query = `INSERT INTO disen (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latitud}, "${Fecha}", "${Hora}")`;
-  console.log(Complete)
+  const query = `INSERT INTO disen (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latidud}, "${Fecha}", "${Hora}")`;
+
   
   connection.query(query, function(err, result){
     if(err)throw err;
@@ -53,15 +52,15 @@ app.use(express.static(__dirname + '/public'));
 
 app.get("/", (req, res) => {
   //res.send("hello world!");
-  console.log(process.env.Rds_DB);
+  console.log(process.env.design);
   res.sendFile(path.join(__dirname + "/index.html"));
 });
 
 
 const getRecordInfo = async (Fecha1,Fecha2) => {
 const query = `SELECT * FROM disen WHERE date BETWEEN ${Fecha1} AND ${Fecha2}`;
-const {rows:[{Longitud, Latitud, Fecha, Hora}]} = await connection.query(query);
-  return {Longitud, Latitud, Fecha, Hora}
+const {rows:[{Longitud, Latidud, Fecha, Hora}]} = await connection.query(query);
+  return {Longitud, Latidud, Fecha, Hora}
 
 };
 app.get("/data", async (req, res) => {
@@ -79,24 +78,7 @@ app.get("/record", async (req, res) => {
   const info = await getLastLocation()
   res.send(info).status(200); 
 });
- app.post('/Historicos'), async (req, res) => {
-  let ifecha = req.body.finicial, ffecha = req.body.ffinal
-  ifecha = new FechaID(ifecha), ffecha = new FechaID(ffecha)
-  ifecha = moment(ifecha).format('YYYY:MM:DD HH:mm:ss')
-  ffecha = moment(ffecha).format('YYYY:MM:DD HH:mm:ss')
-  query =  `SELECT * FROM disen WHERE date BETWEEN ${ifecha} AND ${ffecha}`
-  response = await new Promise((resolve, reject)=>{
-    connection.query(query,(e,d)=>{
-      if(e)throw e
-          else{console.log(query,d)
-              resolve(d)
-          }
-      })
-  })
-  res.status(200).json({
-      response
-  })
- }
+
 const dgram = require('dgram');
 const { Hora } = require("console");
 const server = dgram.createSocket('udp4');
@@ -122,6 +104,6 @@ server.on('listening', (req, res) => {
   console.log(`UDP server listening on: ${address.address}:${address.port}`);
 });
 
-//xd
+//xdxdxdxdxdxd
 server.bind(9001);
 app.listen(9001, () => console.log('Server on port: 9001'));
