@@ -12,15 +12,15 @@ const data = {
   
 }
 
-//Conexión db
+//Conexión de de la rds 
 
-  const mysql  = require('mysql2');
-  const connection = mysql.createConnection({
-    user: process.env.Rds_user,
-    host: process.env.Rds_Hostname,
-    database: process.env.Rds_DB,
-    password: process.env.Rds_Pass,
-    port: "3306"
+const mysql  = require('mysql');
+const connection = mysql.createConnection({
+  user: process.env.Rds_user,
+  host: process.env.Rds_Hostname,
+  database: process.env.Rds_DB,
+  password: process.env.Rds_Pass,
+  port: "3306"
 })  
 connection.connect(function (err){
   if (err) {
@@ -32,11 +32,13 @@ else{
 }
 })
 
+
+
 const insertData = async (Longitud, Latidud, Fecha, Hora) => {
   
 
   const query = `INSERT INTO disen (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latidud}, "${Fecha}", "${Hora}")`;
-  console.log("Complete")
+  console.log(Complete)
   
   connection.query(query, function(err, result){
     if(err)throw err;
@@ -120,7 +122,11 @@ server.on('listening', (req, res) => {
   console.log(`UDP server listening on: ${address.address}:${address.port}`);
 });
 
+<<<<<<< HEAD
 //xdxdxdxdxdxdxdxd
 //xdxdxdxd
+=======
+//xdxdxdxdxdxdxdxdxd
+>>>>>>> 50c9dd4f249c2a8f215b1c18237a04be709a8543
 server.bind(9001);
 app.listen(9001, () => console.log('Server on port: 9001'));
