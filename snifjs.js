@@ -80,8 +80,8 @@ app.get("/record", async (req, res) => {
  app.post('/Historicos'), async (req, res) => {
   let ifecha = req.body.finicial, ffecha = req.body.ffinal
   ifecha = new FechaID(ifecha), ffecha = new FechaID(ffecha)
-  ifecha = moment(ifecha).format('YYYY:MM:DD HH:mm:ss')
-  ffecha = moment(ffecha).format('YYYY:MM:DD HH:mm:ss')
+  ifecha = moment(ifecha).format('DD:MM:YYYY HH:mm:ss')
+  ffecha = moment(ffecha).format('DD:MM:YYYY  HH:mm:ss')
   query =  `SELECT * FROM disen WHERE date BETWEEN ${ifecha} AND ${ffecha}`
   response = await new Promise((resolve, reject)=>{
     connection.query(query,(e,d)=>{
@@ -120,10 +120,6 @@ server.on('listening', (req, res) => {
   console.log(`UDP server listening on: ${address.address}:${address.port}`);
 });
 
-<<<<<<< HEAD
-//xdxdxdxdxdxdxdxd
-=======
 //xdxd
->>>>>>> 4e23f439362a6098245d26867296f8b7f7ffd1e1
 server.bind(9001);
 app.listen(9001, () => console.log('Server on port: 9001'));
