@@ -11,36 +11,26 @@
         <link rel="stylesheet" href="estilo.css">
     </head>
     <body>
+        <header>
+            <a href="/historicosFecha" class="links">Consulta por fecha</a>
+            <a href="/historicosRango" class="links" style="left: 166px;" >Consulta por rango</a>
+            <div style="margin: 0 auto; border-radius: 20px; background-color: #fff; padding: 5px 15px">
+                <img src="/camion location.png" alt="Logo" height="80px">
+            </div>
+        </header>
+        <div class="divHome">
+            <label class="labels">Latitud:</label>
+            <label id="latID" class="labelHome"></label>
 
-        <div>
-            <header style="text-align: center;"><i><b>Camion Location</b></i></header>
-        </div>
-        <div>
-            <a href="/data">Ultima localización</a> 
-            </div>
-
-        <div>
-            <a href="/historico.html">Historicos</a> 
-            </div>
-
-            <div><label>Latitud </label>
-                <label id="latID" class="labelHome"></label>
-            </div>
+            <label class="labels">Longitud:</label>
+            <label id="longID" class="labelHome"></label>
     
-            <div>
-                <label>Longitud</label>
-                <label id="longID" class="labelHome"></label>
-            </div>
-    
-            <div><label>Fecha</label>
-                <label id="dateID" class="labelHome"></label>
-            </div>
+            <label class="labels">Fecha:</label>
+            <label id="dateID" class="labelHome"></label>
     
     
-            <div><label>Hora</label>
-                <label id="timeID" class="labelHome"></label>
-            </div>
-    
+            <label class="labels">Hora:</label>
+            <label id="timeID" class="labelHome"></label>
         </div>
 
         <div id="map"></div>

@@ -1,3 +1,4 @@
+//exports
 const express = require("express");
 const path = require("path");
 const moment = require("moment");
@@ -12,7 +13,7 @@ const data = {
   
 }
 
-//Conexión de de la rds 
+//Conexión de la rds 
 
 const mysql  = require('mysql');
 const connection = mysql.createConnection({
@@ -33,11 +34,11 @@ else{
 })
 
 
-
+//LLenado de base de datos
 const insertData = async (Longitud, Latitud, Fecha, Hora) => {
   
 
-  const query = `INSERT INTO disen (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latitud}, "${Fecha}", "${Hora}")`;
+  const query = `INSERT INTO disen   (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latitud}, "${Fecha}", "${Hora}")`;
   console.log("Complete")
   
   connection.query(query, function(err, result){
@@ -45,17 +46,24 @@ const insertData = async (Longitud, Latitud, Fecha, Hora) => {
     console.log("insertado")
   })
 };
-//>>>>>>> main
+//>>>>>>> main 
 const app = express();
 app.use(express.json())
 
 app.use(express.static(__dirname + '/public'));
-
+// URLs 
 app.get("/", (req, res) => {
   //res.send("hello world!");
   console.log(process.env.Rds_DB);
   res.sendFile(path.join(__dirname + "/index.html"));
   console.log("enviado a pagina web");
+});
+app.get("/historicosFecha", (req, res) => {
+  return res.sendFile(path.join(__dirname + "/historico.html"));
+});
+
+app.get("/historicosRango", (req, res) => {
+  return res.sendFile(path.join(__dirname + "/historicorange.html"));
 });
 
 
@@ -78,28 +86,62 @@ app.get("/data", async (req, res) => {
   });
 });
 app.get("/record", async (req, res) => {
-  const info = await getLastLocation()
-  res.send(info).status(200); 
+  const ifecha = req.query.ifecha;
+  const ffecha = req.query.ffecha;
+
+  const query = `SELECT * FROM gps2sms_table WHERE date BETWEEN STR_TO_DATE( "${ifecha}" ,"%Y-%m-%d %H:%i:%s") AND STR_TO_DATE( "${ffecha}" ,"%Y-%m-%d %H:%i:%s")`;
+  connection.query(query,(err, result) => {
+    if (!err) {
+      return res.send(result).status(200);
+    } else {
+      console.log(`Ha ocurrido el siguiente ${err}`);
+      return res.status(500);
+    }
+  })
 });
- app.post('/historicos'), async (req, res) => {
-  let ifecha = req.body.finicial, ffecha = req.body.ffinal
-  ifecha = new Date(ifecha), ffecha = new Date(ffecha)
-  ifecha = moment(ifecha).format('YYYY:MM:DD')
-  ffecha = moment(ffecha).format('YYYY:MM:DD')
-  query =  `SELECT * FROM disen WHERE Fecha BETWEEN ${ifecha} AND ${ffecha}`
-  response = await new Promise((resolve, reject)=>{
-    connection.query(query,(e,d)=>{
-      if(e)throw e
-          else{console.log(query,d)
-              resolve(d)
-              console.log("success")
-          }
-      })
-  })
-  res.status(200).json({
-      response
-  })
- }
+// app.post('/historicos'), async (req, res) => {
+  //let ifecha = req.body.finicial, ffecha = req.body.ffinal
+  //ifecha = new Date(ifecha), ffecha = new Date(ffecha)
+  //ifecha = moment(ifecha).format('YYYY:MM:DD')
+  //ffecha = moment(ffecha).format('YYYY:MM:DD')
+  //query =  `SELECT * FROM disen WHERE Fecha BETWEEN ${ifecha} AND ${ffecha}`;
+  //response = await new Promise((resolve, reject)=>{
+    //connection.query(query,(e,d)=>{
+      
+    //if(e)throw e
+       //   else{console.log(query,d)
+         //     resolve(d)
+          //    console.log("success")
+         // }
+      //})
+  //})
+  //res.status(200).json({
+   //   response
+//})
+ //}
+app.get("/Rangos"), async (req, res) => {
+  const Latitud1 = req.query.Latitud1;
+  const Latitud2 = req.query.Latitud2;
+  const Longitud1 = req.query.Longitud1;
+  const Longitud2 = req.query.Longitud2;
+
+  const query = `SELECT * FROM disen WHERE (Latitud BETWEEN "${Latitud1}" AND "${Latitud2}") AND (Longitud BETWEEN "${Longitud1}" AND "${Longitud2}")`;
+  connection.query(query,(err, result) => {
+    if (!err) {
+      return res.send(result).status(200);
+    } else {
+      console.log("Ha ocurrido un error: ${err}");
+      return res.status(500);
+    }
+  })   
+};
+
+
+
+
+
+
+ // Socket
 const dgram = require('dgram');
 const { Hora } = require("console");
 const server = dgram.createSocket('udp4');

@@ -23,6 +23,7 @@ const showData = async () => {
                 longID.textContent = lastInfo.Longitud;
                 dateID.textContent = lastInfo.Fecha;
                 timeID.textContent = lastInfo.Hora;
+                map.flyTo([lastInfo.Latitud,lastInfo.Longitud],13);
                 marcador.setLatLng([lastInfo.Latitud,lastInfo.Longitud])
                 polylineCoords.push([lastInfo.Latitud,lastInfo.Longitud])
                 polyline.setLatLngs(polylineCoords);
