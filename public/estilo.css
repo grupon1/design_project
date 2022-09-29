@@ -1,5 +1,9 @@
 body {
+<<<<<<< HEAD
     background-color: rgba(226, 209, 133, 0.925);
+=======
+    background-color: rgb(105, 221, 242);
+>>>>>>> 4c6eb85b9bd81ceca412fe3d2d80c3ca83fa3ff7
     margin: 0;
 }
 div {
