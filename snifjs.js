@@ -119,7 +119,7 @@ app.get("/record", async (req, res) => {
    //   response
 //})
  //}
-app.get("/Rangos"), async (req, res) => {
+app.get("/Rangos", async (req, res) => {
   const Latitud1 = req.query.Latitud1;
   const Latitud2 = req.query.Latitud2;
   const Longitud1 = req.query.Longitud1;
@@ -134,7 +134,7 @@ app.get("/Rangos"), async (req, res) => {
       return res.status(500);
     }
   })   
-};
+});
 
 
 
