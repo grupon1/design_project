@@ -63,7 +63,7 @@ app.get("/historicosFecha", (req, res) => {
 });
 
 app.get("/historicosRango", (req, res) => {
-  return res.sendFile(path.join(__dirname + "/historicorange.html"));
+  return res.sendFile(path.join(__dirname + "/historicorango.html"));
 });
 
 
