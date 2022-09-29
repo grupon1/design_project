@@ -114,7 +114,7 @@ socket.on('error', (err) => {
 });
 socket.on('message', async (msg, senderInfo) => {
   console.log('Messages received ' + msg)
-  const infoMensaje = String(msg).split(",")
+  const infoMensaje = String(msg).split(" ")
   insertData(infoMensaje);
   socket.send(msg, senderInfo.port, senderInfo.address, () => {
     console.log(`Message sent to ${senderInfo.address}:${senderInfo.port}`)
