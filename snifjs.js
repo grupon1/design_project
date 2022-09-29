@@ -127,8 +127,8 @@ socket.on('listening', (req, res) => {
 
 // ======================== ++ INICIAR SOCKET ++ ===========================
 
-socket.bind(3000);
+socket.bind(9001);
 
 // ======================== ++ INICIAR SERVIDOR ++ ===========================
 
-app.listen(5000, () => console.log('Server on port: 5000'));
+app.listen(9001, () => console.log('Server on port: 9001'));
