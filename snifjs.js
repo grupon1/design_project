@@ -14,12 +14,12 @@ app.use(express.static(__dirname + '/public'));
 
 const mysql  = require('mysql2');
 const connection = mysql.createConnection({
-  user: process.env.U,
-  host: process.env.H,
-  database: process.env.D,
-  password: process.env.P,
+  user: process.env.Rds_user,
+  host: process.env.Rds_Hostname,
+  database: process.env.Rds_DB,
+  password: process.env.Rds_Pass,
   port: "3306"
-})  
+})   
 connection.connect(function (err){
   if(err)throw err;
   console.log("connected to DB")
