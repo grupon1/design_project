@@ -81,6 +81,7 @@ app.get("/record", async (req, res) => {
   ifecha = moment(ifecha).format('YYYY:MM:DD')
   ffecha = moment(ffecha).format('YYYY:MM:DD')
   query =  `SELECT * FROM Datagps WHERE Fecha BETWEEN ${ifecha} AND ${ffecha}`
+  console.log(query)
   response = await new Promise((resolve, reject)=>{
     connection.query(query,(e,d)=>{
       if(e)throw e
