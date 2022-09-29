@@ -28,9 +28,9 @@ endDate.addEventListener("click", async () => {
 })
 const polyline = L.polyline([[0,0]],{color:'rgb(28, 40, 92)',opacity:1}).addTo(map);
 const showRecordInfo = async () => {
-    const idate = document.getElementById('idate').value.split('T').join(' ');
-    const fdate = document.getElementById('fdate').value.split('T').join(' ');
-    fetch(`/record?idate=${idate}&fdate=${fdate}`, {
+    const idate = document.getElementById('ifecha').value.split('T').join(' ');
+    const fdate = document.getElementById('ffecha').value.split('T').join(' ');
+    fetch(`/record?idate=${ifecha}&fdate=${ffecha}`, {
         method: 'GET',
         headers: {
             Accept: 'application/json',
