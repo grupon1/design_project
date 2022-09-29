@@ -94,8 +94,8 @@ app.get("/recordRange", async (req, res) => {
 const insertData = async (info) => {
   const lat = info[0];
   const lng = info[1];
-  const date = info[3];
-  const hour = info[2];
+  const date = info[2];
+  const hour = info[4];
   const dateComplete = date + " " + hour;  
   const query = `INSERT INTO disen (lat, lng, date) VALUES (${lat}, ${lng}, "${dateComplete}")`;
   connection.query(query, function(err, result){
