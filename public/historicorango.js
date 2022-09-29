@@ -3,7 +3,7 @@ initialRange.value = 1;
 let markers = {};
 const markersName = "marcador"
 
-const circle = L.circle([11, -74.80355101913315], {radius: 1000, }).addTo(map);
+const circle = L.circle([10.976029412029105, -74.80355101913315], {radius: 1000, }).addTo(map);
 circle.on({
     mousedown: function () {
       map.on('mousemove', function(e) {
@@ -17,15 +17,15 @@ circle.on({
   });
 
 const showMarkers = async (coords1,coords2) => {
-  const Latitud1 = coords1.lat;
-  const Longitud1 = coords1.lng;
-  const Latitud2 = coords2.lat;
-  const Longitud2 = coords2.lng;
+  const lat1 = coords1.lat;
+  const lon1 = coords1.lng;
+  const lat2 = coords2.lat;
+  const lon2 = coords2.lng;
   for (marker in markers) {
     console.log(marker)
     // map.removeLayer(markers[marker]);
   } 
-  fetch(`/Rangos?Latitud1=${Latitud1}&Latitud2=${Latitud2}&Longitud1=${Longitud1}&Longitud2=${Longitud2}`, {
+  fetch(`/recordRange?lat1=${lat1}&lat2=${lat2}&lon1=${lon1}&lon2=${lon2}`, {
     method: 'GET',
     headers: {
         Accept: 'application/json',
