@@ -89,13 +89,13 @@ app.get("/recordRange", async (req, res) => {
 });
 
 
-// ======================== ++ GUARDAR INFO RECIBIDA ++ ===========================
+
 
 const insertData = async (info) => {
   const lat = info[0];
   const lng = info[1];
   const date = info[2];
-  const hour = info[4];
+  const hour = info[3];
   const dateComplete = date + " " + hour;  
   const query = `INSERT INTO disen (lat, lng, date) VALUES (${lat}, ${lng}, "${dateComplete}")`;
   connection.query(query, function(err, result){
@@ -104,7 +104,7 @@ const insertData = async (info) => {
   })
 };
 
-// ======================== ++ CREAR SOCKET ++ ===========================
+
 
 const dgram = require('dgram');
 const socket = dgram.createSocket('udp4');
@@ -125,10 +125,10 @@ socket.on('listening', (req, res) => {
   console.log(`UDP server listening on: ${address.address}:${address.port}`);
 });
 
-// ======================== ++ INICIAR SOCKET ++ ===========================
+
 
 socket.bind(9001);
 
-// ======================== ++ INICIAR SERVIDOR ++ ===========================
+
 
 app.listen(9001, () => console.log('Server on port: 9001'));
