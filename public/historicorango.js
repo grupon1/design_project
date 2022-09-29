@@ -23,7 +23,7 @@ const showMarkers = async (coords1,coords2) => {
   const lon2 = coords2.lng;
   for (marker in markers) {
     console.log(marker)
-    // map.removeLayer(markers[marker]);
+  
   } 
   fetch(`/recordRange?lat1=${lat1}&lat2=${lat2}&lon1=${lon1}&lon2=${lon2}`, {
     method: 'GET',
