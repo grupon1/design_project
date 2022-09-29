@@ -44,7 +44,7 @@ const showRecordInfo = async () => {
                 const polylineCoords =  [];
                 // Se rellena el vector con la informacion obtenida de la base de datos                
                 for (let i = 0; i < info.length; i++) {
-                    polylineCoords[i] = [info[i].Latitud,info[i].Longitud]
+                    polylineCoords[i] = [info[i].lat,info[i].lng]
                 }
                 console.log(polylineCoords);
                 // Se traza la polilinea

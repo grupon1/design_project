@@ -7,9 +7,7 @@ const polyline = L.polyline([[0,0]],{color:'red',opacity:1}).addTo(map);
 const marcador = L.marker([0, 0]).addTo(map);
 
 const showData = async () => {
-    const url = window.location;
-    const link = url + "data";
-    fetch(link, {
+    fetch('/data', {
         method: 'GET',
         headers: {
             Accept: 'application/json',
@@ -21,6 +19,7 @@ const showData = async () => {
                 const lastInfo = json[0];
                 latID.textContent = lastInfo.Latitud;
                 longID.textContent = lastInfo.Longitud;
+                console.log(lastInfo)
                 dateID.textContent = lastInfo.Fecha;
                 timeID.textContent = lastInfo.Hora;
                 map.flyTo([lastInfo.Latitud,lastInfo.Longitud],13);

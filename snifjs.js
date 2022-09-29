@@ -67,12 +67,8 @@ app.get("/historicosRango", (req, res) => {
 });
 
 
-const getRecordInfo = async (Fecha1,Fecha2) => {
-const query = `SELECT * FROM disen WHERE Fecha BETWEEN ${Fecha1} AND ${Fecha2}`;
-const {rows:[{Longitud, Latitud, Fecha, Hora}]} = await connection.query(query);
-  return {Longitud, Latitud, Fecha, Hora}
 
-};
+
 app.get("/data", async (req, res) => {
   const query = `SELECT * FROM disen ORDER BY ID DESC LIMIT 1`;
   connection.query(query,(err,result) => {
@@ -99,38 +95,19 @@ app.get("/record", async (req, res) => {
     }
   })
 });
-// app.post('/historicos'), async (req, res) => {
-  //let ifecha = req.body.finicial, ffecha = req.body.ffinal
-  //ifecha = new Date(ifecha), ffecha = new Date(ffecha)
-  //ifecha = moment(ifecha).format('YYYY:MM:DD')
-  //ffecha = moment(ffecha).format('YYYY:MM:DD')
-  //query =  `SELECT * FROM disen WHERE Fecha BETWEEN ${ifecha} AND ${ffecha}`;
-  //response = await new Promise((resolve, reject)=>{
-    //connection.query(query,(e,d)=>{
-      
-    //if(e)throw e
-       //   else{console.log(query,d)
-         //     resolve(d)
-          //    console.log("success")
-         // }
-      //})
-  //})
-  //res.status(200).json({
-   //   response
-//})
- //}
+
 app.get("/Rangos", async (req, res) => {
   const Latitud1 = req.query.Latitud1;
   const Latitud2 = req.query.Latitud2;
   const Longitud1 = req.query.Longitud1;
   const Longitud2 = req.query.Longitud2;
 
-  const query = `SELECT * FROM disen WHERE (Latitud BETWEEN "${Latitud1}" AND "${Latitud2}") AND (Longitud BETWEEN "${Longitud1}" AND "${Longitud2}")`;
+  const query = `SELECT * FROM disen WHERE (lat BETWEEN "${Latitud1}" AND "${Latitud2}") AND (lng BETWEEN "${Longitud1}" AND "${Longitud2}")`;
   connection.query(query,(err, result) => {
     if (!err) {
       return res.send(result).status(200);
     } else {
-      console.log("Ha ocurrido un error: ${err}");
+      console.log("Ha ocurrido un error ${err}");
       return res.status(500);
     }
   })   
