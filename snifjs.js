@@ -89,7 +89,7 @@ app.get("/record", async (req, res) => {
   const ifecha = req.query.ifecha;
   const ffecha = req.query.ffecha;
 
-  const query = `SELECT * FROM disen WHERE date BETWEEN STR_TO_DATE( "${ifecha}" ,"%Y-%m-%d %H:%i:%s") AND STR_TO_DATE( "${ffecha}" ,"%Y-%m-%d %H:%i:%s")`;
+  const query = `SELECT * FROM disen WHERE Fecha BETWEEN STR_TO_DATE( "${ifecha}" ,"%Y-%m-%d %H:%i:%s") AND STR_TO_DATE( "${ffecha}" ,"%Y-%m-%d %H:%i:%s")`;
   connection.query(query,(err, result) => {
     if (!err) {
       return res.send(result).status(200);
