@@ -1,36 +1,63 @@
-// ======================== ++ EXPORTS ++ ===========================
-
+//exports
 const express = require("express");
 const path = require("path");
+const moment = require("moment");
 require('dotenv').config();
 
-// ======================== ++ CREAR APP ++ ===========================
 
-const app = express();
-app.use(express.json())
-app.use(express.static(__dirname + '/public'));
+const data = {
+  Longitud: "",
+  Latitud: "",
+  Hora: "",
+  Fecha: "",
+  
+}
 
-// ======================== ++ COONECTAR A BASE DE DATOS ++ =========================== 
+//Conexión de la rds 
 
-const mysql  = require('mysql2');
+const mysql  = require('mysql');
 const connection = mysql.createConnection({
   user: process.env.Rds_user,
   host: process.env.Rds_Hostname,
   database: process.env.Rds_DB,
   password: process.env.Rds_Pass,
   port: "3306"
-})   
+})  
 connection.connect(function (err){
-  if(err)throw err;
-  console.log("connected to DB")
+  if (err) {
+    console.error('error conecting: ' + err.stack);
+    return;
+}
+else{
+    console.log("Connected to DB")
+}
 })
 
-// ======================== ++ RUTAS WEB ++ ===========================
 
+//LLenado de base de datos
+const insertData = async (Longitud, Latitud, Fecha, Hora) => {
+  
+
+  const query = `INSERT INTO disen   (Longitud, Latitud, Fecha, Hora) VALUES (${Longitud}, ${Latitud}, "${Fecha}", "${Hora}")`;
+  console.log("Complete")
+  
+  connection.query(query, function(err, result){
+    if(err)throw err;
+    console.log("insertado")
+  })
+};
+//>>>>>>> main 
+const app = express();
+app.use(express.json())
+
+app.use(express.static(__dirname + '/public'));
+// URLs 
 app.get("/", (req, res) => {
-  return res.sendFile(path.join(__dirname + "/index.html"));
+  //res.send("hello world!");
+  console.log(process.env.Rds_DB);
+  res.sendFile(path.join(__dirname + "/index.html"));
+  console.log("enviado a pagina web");
 });
-
 app.get("/historicosFecha", (req, res) => {
   return res.sendFile(path.join(__dirname + "/historico.html"));
 });
@@ -39,27 +66,26 @@ app.get("/historicosRango", (req, res) => {
   return res.sendFile(path.join(__dirname + "/historicorango.html"));
 });
 
-// ======================== ++ APIS ++ ===========================
 
-// ======================== ++ API TIEMPO REAL ++ ===========================
+
+
 app.get("/data", async (req, res) => {
   const query = `SELECT * FROM disen ORDER BY ID DESC LIMIT 1`;
   connection.query(query,(err,result) => {
     if (!err) {
       return res.send(result).status(200);     
+      console.log(result);
     } else {
         console.log(`Ha ocurrido el siguiente ${err}`);
         return res.status(500);
     };
   });
 });
-
-// ======================== ++ API HISTORICOS ++ ===========================
 app.get("/record", async (req, res) => {
-  const idate = req.query.idate;
-  const fdate = req.query.fdate;
+  const ifecha = req.query.ifecha;
+  const ffecha = req.query.ffecha;
 
-  const query = `SELECT * FROM disen WHERE date BETWEEN STR_TO_DATE( "${idate}" ,"%Y-%m-%d %H:%i:%s") AND STR_TO_DATE( "${fdate}" ,"%Y-%m-%d %H:%i:%s")`;
+  const query = `SELECT * FROM disen WHERE Fecha BETWEEN STR_TO_DATE( "${ifecha}" ,"%Y-%m-%d %H:%i:%s") AND STR_TO_DATE( "${ffecha}" ,"%Y-%m-%d %H:%i:%s")`;
   connection.query(query,(err, result) => {
     if (!err) {
       return res.send(result).status(200);
@@ -70,65 +96,54 @@ app.get("/record", async (req, res) => {
   })
 });
 
-// ======================== ++ API RANGOS ++ ===========================
-app.get("/recordRange", async (req, res) => {
-  const lat1 = req.query.lat1;
-  const lat2 = req.query.lat2;
-  const lon1 = req.query.lon1;
-  const lon2 = req.query.lon2;
+app.get("/Rangos", async (req, res) => {
+  const Latitud1 = req.query.Latitud1;
+  const Latitud2 = req.query.Latitud2;
+  const Longitud1 = req.query.Longitud1;
+  const Longitud2 = req.query.Longitud2;
 
-  const query = `SELECT * FROM disen WHERE (lat BETWEEN "${lat1}" AND "${lat2}") AND (lng BETWEEN "${lon1}" AND "${lon2}")`;
+  const query = `SELECT * FROM disen WHERE (lat BETWEEN "${Latitud1}" AND "${Latitud2}") AND (lng BETWEEN "${Longitud1}" AND "${Longitud2}")`;
   connection.query(query,(err, result) => {
     if (!err) {
       return res.send(result).status(200);
     } else {
-      console.log(`Ha ocurrido el siguiente ${err}`);
+      console.log("Ha ocurrido un error ${err}");
       return res.status(500);
     }
-  })
+  })   
 });
 
 
-// ======================== ++ GUARDAR INFO RECIBIDA ++ ===========================
 
-const insertData = async (info) => {
-  const lat = info[0];
-  const lng = info[1];
-  const date = info[2];
-  const hour = info[4];
-  const dateComplete = date + " " + hour;  
-  const query = `INSERT INTO disen (lat, lng, date) VALUES (${lat}, ${lng}, "${dateComplete}")`;
-  connection.query(query, function(err, result){
-    if(err)throw err;
-    console.log("Registro guardado exitosamente.")
-  })
-};
 
-// ======================== ++ CREAR SOCKET ++ ===========================
 
+
+ // Socket
 const dgram = require('dgram');
-const socket = dgram.createSocket('udp4');
-socket.on('error', (err) => {
+const { Hora } = require("console");
+const server = dgram.createSocket('udp4');
+server.on('error', (err) => {
   console.log(`server error:\n${err.stack}`);
-  socket.close();
+  server.close();
 });
-socket.on('message', async (msg, senderInfo) => {
+server.on('message', async (msg, senderInfo) => {
   console.log('Messages received ' + msg)
-  const infoMensaje = String(msg).split(" ")
-  insertData(infoMensaje);
-  socket.send(msg, senderInfo.port, senderInfo.address, () => {
+  const mensaje = String(msg).split(" ")
+  data.Longitud= mensaje[1]
+  data.Latitud = mensaje[0]
+  data.Fecha = mensaje[2]
+  data.Hora = mensaje[4]
+  console.log(mensaje)
+  insertData(data.Longitud,data.Latitud, data.Fecha,data.Hora);
+  server.send(msg, senderInfo.port, senderInfo.address, () => {
     console.log(`Message sent to ${senderInfo.address}:${senderInfo.port}`)
   })
 });
-socket.on('listening', (req, res) => {
-  const address =   socket.address();
+server.on('listening', (req, res) => {
+  const address = server.address();
   console.log(`UDP server listening on: ${address.address}:${address.port}`);
 });
 
-// ======================== ++ INICIAR SOCKET ++ ===========================
-
-socket.bind(9001);
-
-// ======================== ++ INICIAR SERVIDOR ++ ===========================
-
+//xdxdxdxdxd
+server.bind(9001);
 app.listen(9001, () => console.log('Server on port: 9001'));
