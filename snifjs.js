@@ -94,8 +94,8 @@ app.get("/recordRange", async (req, res) => {
 const insertData = async (info) => {
   const lat = info[0];
   const lng = info[1];
-  const date = info[3];
-  const hour = info[2];
+  const date = info[2];
+  const hour = info[4];
   const dateComplete = date + " " + hour;  
   const query = `INSERT INTO disen (lat, lng, date) VALUES (${lat}, ${lng}, "${dateComplete}")`;
   connection.query(query, function(err, result){
@@ -114,7 +114,7 @@ socket.on('error', (err) => {
 });
 socket.on('message', async (msg, senderInfo) => {
   console.log('Messages received ' + msg)
-  const infoMensaje = String(msg).split(",")
+  const infoMensaje = String(msg).split(" ")
   insertData(infoMensaje);
   socket.send(msg, senderInfo.port, senderInfo.address, () => {
     console.log(`Message sent to ${senderInfo.address}:${senderInfo.port}`)
