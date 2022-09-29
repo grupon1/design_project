@@ -53,6 +53,7 @@ app.get("/", (req, res) => {
 });
 
 
+//
 const getRecordInfo = async (Fecha1,Fecha2) => {
 const query = `SELECT * FROM disen WHERE Fecha BETWEEN ${Fecha1} AND ${Fecha2}`;
 const {rows:[{Longitud, Latitud, Fecha, Hora}]} = await connection.query(query);
