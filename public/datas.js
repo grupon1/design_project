@@ -31,7 +31,7 @@ const showData = async () => {
                 longID.textContent = lastInfo.lng;
                 console.log(lastInfo)
                 dateID.textContent = lastInfo.date.split('T')[0];
-                timeID.textContent = lastInfo.date.split('T')[1].split(' ')[0];
+              
                 // Se modifica la coordenada del marcador
                 map.flyTo([lastInfo.lat,lastInfo.lng],13);
                 marcador.setLatLng([lastInfo.lat,lastInfo.lng])
