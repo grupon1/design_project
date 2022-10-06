@@ -3,11 +3,11 @@ initialRange.value = 1;
 let markers = {};
 const markersName = "marcador"
 
-const circle = L.circle([11, -74.80355101913315], {radius: 1000, }).addTo(map);
-circle.on({
+const rectangle = L.circle([11, -74.80355101913315], {radius: 1000, }).addTo(map);
+rectangle.on({
     mousedown: function () {
       map.on('mousemove', function(e) {
-        circle.setLatLng(e.latlng);
+        rectangle.setLatLng(e.latlng);
         setRange();
       });
     },
