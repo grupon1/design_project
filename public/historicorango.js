@@ -3,11 +3,11 @@ initialRange.value = 1;
 let markers = {};
 const markersName = "marcador"
 
-const rectangle = L.rectangle([[11, -74.80355101913315], [11,-74.81]]).addTo(map);
-rectangle.on({
+const circle = L.circle([11, -74.80355101913315], {radius: 1000, }).addTo(map);
+circle.on({
     mousedown: function () {
       map.on('mousemove', function(e) {
-        rectangle.setLatLng(e.latlng);
+        circle.setLatLng(e.latlng);
         setRange();
       });
     },
@@ -46,7 +46,7 @@ const showMarkers = async (coords1,coords2) => {
 
 const setRange = () => {
   const range = document.getElementById('range').value;
-  const metersRange = range * 300;
+  const metersRange = range * 350;
   circle.setRadius(metersRange);
 }
 
