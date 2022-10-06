@@ -46,7 +46,7 @@ const showMarkers = async (coords1,coords2) => {
 
 const setRange = () => {
   const range = document.getElementById('range').value;
-  const metersRange = range * 350;
+  const metersRange = range * 300;
   circle.setRadius(metersRange);
 }
 
