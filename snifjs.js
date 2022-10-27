@@ -99,7 +99,7 @@ const insertData = async (info) => {
   const hour = info[3];
   const carro = info[4];
   const dateComplete = date + " " + hour;  
-  const query = `INSERT INTO disen (lat, lng, date, carro) VALUES (${lat}, ${lng}, "${dateComplete}", "${carro})`;
+  const query = `INSERT INTO disen (lat, lng, date, carro) VALUES (${lat}, ${lng}, "${dateComplete}", ${carro})`;
   connection.query(query, function(err, result){
     if(err)throw err;
     console.log("Registro guardado exitosamente.")
