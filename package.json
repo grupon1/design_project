@@ -1,0 +1,31 @@
+{
+  "name": "design_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "snifjs.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/grupon1/design_project.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/grupon1/design_project/issues"
+  },
+  "homepage": "https://github.com/grupon1/design_project#readme",
+  "dependencies": {
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
+    "moment": "^2.29.4",
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "pg": "^8.8.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  }
+}
