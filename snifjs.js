@@ -43,8 +43,8 @@ app.get("/historicosRango", (req, res) => {
 
 
 app.get("/data", async (req, res) => {
-  const vehiculo = req.query.carro;
-  const query = `SELECT * FROM disen WHERE driver = "${vehiculo}" ORDER BY ID DESC LIMIT 1`;
+  const carro = req.query.carro;
+  const query = `SELECT * FROM disen WHERE driver = "${carro}" ORDER BY ID DESC LIMIT 1`;
   connection.query(query,(err,result) => {
     if (!err) {
       return res.send(result).status(200);     
@@ -99,7 +99,7 @@ const insertData = async (info) => {
   const hour = info[3];
   const carro = info[4];
   const dateComplete = date + " " + hour;  
-  const query = `INSERT INTO disen (lat, lng, date) VALUES (${lat}, ${lng}, "${dateComplete}", "${carro})`;
+  const query = `INSERT INTO disen (lat, lng, date, carro) VALUES (${lat}, ${lng}, "${dateComplete}", "${carro})`;
   connection.query(query, function(err, result){
     if(err)throw err;
     console.log("Registro guardado exitosamente.")
