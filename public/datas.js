@@ -14,8 +14,9 @@ const deletePolyline = () => {
     polylineCoords = [];   
 }
 
-const showData = async () => {
-    fetch('/data', {
+const showData = async (resetPolyline) => {
+    const carro = document.getElementById("inputcarro").value;  
+    fetch('/data?carro=${carro}', {
         method: 'GET',
         headers: {
             Accept: 'application/json',
@@ -54,5 +55,5 @@ const showData = async () => {
 showData();
 
 const timer = setInterval(() => {
-    showData();
+    showData(); 
 }, 5000);
