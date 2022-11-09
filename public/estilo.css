@@ -60,7 +60,7 @@ header {
 .submitInput {
     padding: 10px 15px;
     background-color: rgb(93, 94, 91);
-    color: #fff;
+    color: rgb(210, 30, 30);
     border-radius: 5px;
     border: none;
     cursor: pointer;
