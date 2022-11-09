@@ -44,7 +44,11 @@ app.get("/historicosRango", (req, res) => {
 
 app.get("/data", async (req, res) => {
   const carro = req.query.carro;
-  const query = `SELECT * FROM disen WHERE driver = "${carro}" ORDER BY ID DESC LIMIT 1`;
+  if (carro === 'Todos' ) {
+    query = `SELECT * FROM disen ORDER BY ID DESC LIMIT 1`;
+  } else {
+    query = `SELECT * FROM disen WHERE driver = "${carro}" ORDER BY ID DESC LIMIT 1`;
+  }
   connection.query(query,(err,result) => {
     if (!err) {
       return res.send(result).status(200);     

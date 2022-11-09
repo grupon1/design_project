@@ -56,4 +56,4 @@ showData();
 
 const timer = setInterval(() => {
     showData(); 
-}, 5000);
+}, 6000);

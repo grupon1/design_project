@@ -10,6 +10,7 @@ const listener = function(e) {
 
 
 const circle = L.circle([11, -74.80355101913315], {radius: 1000, }).addTo(map);
+let clicker = false;
 circle.on({
     /*mousedown: function () {
       map.on('mousemove', function(e) {
