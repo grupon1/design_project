@@ -47,7 +47,7 @@ app.get("/data", async (req, res) => {
   if (carro === 'Todos' ) {
     query = `SELECT * FROM disen ORDER BY ID DESC LIMIT 1`;
   } else {
-    query = `SELECT * FROM disen WHERE driver = "${carro}" ORDER BY ID DESC LIMIT 1`;
+    query = `SELECT * FROM disen WHERE carro = "${carro}" ORDER BY ID DESC LIMIT 1`;
   }
   connection.query(query,(err,result) => {
     if (!err) {
