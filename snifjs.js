@@ -68,7 +68,7 @@ app.get("/record", async (req, res) => {
   console.log(query);
   connection.query(query,(err, result) => {
     if (!err) {
-      console.log(results);
+      console.log(result);
       return res.send(result).status(200);
     } else {
       console.log(`Ha ocurrido el siguiente ${err}`);

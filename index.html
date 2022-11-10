@@ -11,19 +11,34 @@
         <link rel="stylesheet" href="estilo.css">
     </head>
     <body>
-        <header>
-            <a href="/historicosFecha" class="links">Consulta por fecha</a>
-            <div style="margin: 0 auto; border-radius: 20px; background-color: #fff; padding: 5px 15px">
-                <img src="/camion location.png" alt="Logo" height="100px">
+        <header>            
+            <div style="margin: 0 auto; border-radius: 20px; background-color: rgb(255, 204, 45); padding-top: 5px;">
+                <h1>
+                    <b>
+                      <a
+                        href="/" class="negros" >
+                        <img src="/Taxi_Location.png" alt="Logo" height="50px" />Taxi Location
+                      </a>
+                    </b>
+                  </h1>
             </div>
         </header>
+
+        <dl>
+            <ld><a href="/" class="blancos">Inicio</a></ld>
+            <ld><a class="active" href="/TiempoReal" class="blancos">Tiempo Real</a></ld>
+            <ld><a href="/Historicos" class="blancos">Históricos</a></ld>
+            <ld style="float:right" class="blancos"><a href="/about">About</a></ld>
+        </dl>
+
         <div class="selectList-container">
-            Vehiculo a seguir:
-            <select id="inputcarro" class="selectList" onchange="getcarroInfo(true)">
+            Seleccione el vehiculo:  
+            <select id="inputPlaca" class="selectList" onchange="getTaxiInfo(true)">
                 <option class="list-item" value="1">1</option>
                 <option class="list-item" value="2">2</option>
                 <option class="list-item" value="Todos">All</option>
             </select>
+        </div>
         <div class="divHome">
             <label class="labels">Latitud:</label>
             <label id="latID" class="labelHome"></label>
@@ -33,27 +48,32 @@
     
             <label class="labels">Fecha:</label>
             <label id="dateID" class="labelHome"></label>
-
+    
+    
             <label class="labels">Hora:</label>
             <label id="timeID" class="labelHome"></label>
 
+            <label class="labels">rpm:</label>
+            <label id="rpmID" class="labelHome"></label>
         </div>
         <div class="divHome">
-            <label class="labels">Latitud:</label>
+            <label class="labels">Latitud2:</label>
             <label id="latID2" class="labelHome"></label>
 
-            <label class="labels">Longitud:</label>
+            <label class="labels">Longitud2:</label>
             <label id="longID2" class="labelHome"></label>
     
-            <label class="labels">Fecha:</label>
+            <label class="labels">Fecha2:</label>
             <label id="dateID2" class="labelHome"></label>
     
     
-            <label class="labels">Hora:</label>
+            <label class="labels">Hora2:</label>
             <label id="timeID2"2 class="labelHome"></label>
 
-
+            <label class="labels">rpm:</label>
+            <label id="rpmID2" class="labelHome"></label>
         </div>
+
 
         <div id="map"></div>
 
@@ -61,7 +81,7 @@
         integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
         crossorigin=""></script>
         <script>
-            const map = L.map('map').setView([11, -74.80355101913315], 12);
+            const map = L.map('map').setView([10.976029412029105, -74.80355101913315], 12);
             L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token={accessToken}', {
                 attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
                 maxZoom: 18,
@@ -72,7 +92,10 @@
             }).addTo(map);
                       
         </script>
-        <script src="showinfo.js"></script>
-        <script src="selector.js"></script>
+        <script src="./showInfo.js"></script>
+        <script src="./selectList.js"></script>
     </body>
+    <div id="copyright">
+        Designed with love &hearts;
+    </div>
 </html>
