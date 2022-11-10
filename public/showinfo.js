@@ -43,10 +43,10 @@ const getcarroInfo = (resetPolyline) => {
     if (vehi == 3) {
         marcador1.addTo(map)
         marcador2.addTo(map)
-        showData('1',polylineCoords,marcador1,polyline1);
-        showData('2',polylineCoords2,marcador2,polyline2);
+        showData(1,polylineCoords,marcador1,polyline1);
+        showData(2,polylineCoords2,marcador2,polyline2);
     } else {
-        if (vehi == '1') {
+        if (vehi == 1) {
             marcador1.addTo(map)
             showData(vehi,polylineCoords,marcador1,polyline1);
             map.removeLayer(marcador2);
@@ -73,7 +73,7 @@ const showData = async (carro,polylineVector,marker,polyline) => {
                 // Obtenemos informacion de la base de datos
                 const lastInfo = json[0];
                 // Se coloca la informacion en los elementos seleccionados al comienzo del codigo.
-                if (carro == '1') {
+                if (carro == 1) {
                     latID.textContent = lastInfo.lat;
                     longID.textContent = lastInfo.lng;
                     
@@ -100,7 +100,7 @@ const showData = async (carro,polylineVector,marker,polyline) => {
                 const carrooption = document.getElementById('inputCarro').value;
                 if (carrooption != 3) {
                     map.flyTo([lastInfo.lat,lastInfo.lng],13);
-                    if (carro == '1') {
+                    if (carro == 1) {
                         dateID2.textContent = '';
                         timeID2.textContent = '';
                         latID2.textContent = '';
