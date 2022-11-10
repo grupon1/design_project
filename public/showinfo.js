@@ -25,7 +25,7 @@ const polyline2 = L.polyline([[0,0]],{color:'blue',opacity:1}).addTo(map);
 const marcador2 = L.marker([0, 0], {Icon: RedIcon}).bindPopup('carro: #2');
 
 var RedIcon = new L.Icon({
-    iconUrl: 'public/marker-icon-red.png',
+    iconUrl: 'https://github.com/grupon1/design_project/blob/main/public/marker-icon-red.png',
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
