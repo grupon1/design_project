@@ -38,7 +38,7 @@ const deletePolyline = () => {
 }
 
 const getcarroInfo = (resetPolyline) => {
-    const vehi = document.getElementById('inputcarro').value;
+    const vehi = document.getElementById('inputCarro').value;
     resetPolyline == true ? deletePolyline() : null
     if (vehi == 2) {
         marcador1.addTo(map)
@@ -60,7 +60,7 @@ const getcarroInfo = (resetPolyline) => {
 
 // funcion para mostrar la informacion de la base de datos
 const showData = async (carro,polylineVector,marker,polyline) => {
-    // const carro = document.getElementById("inputcarro").value;  
+    // const carro = document.getElementById("inputCarro").value;  
     fetch(`/data?carro=${carro}`, {
         method: 'GET',
         headers: {
@@ -97,7 +97,7 @@ const showData = async (carro,polylineVector,marker,polyline) => {
                     }
                 }
 
-                const carrooption = document.getElementById('inputcarro').value;
+                const carrooption = document.getElementById('inputCarro').value;
                 if (carrooption != 2) {
                     map.flyTo([lastInfo.lat,lastInfo.lng],13);
                     if (carro == '1') {

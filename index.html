@@ -17,7 +17,7 @@
                     <b>
                       <a
                         href="/" class="negros" >
-                        <img src="/Taxi_Location.png" alt="Logo" height="50px" />Taxi Location
+                        <img src="/Camion Location.png" alt="Logo" height="50px" />Camion Location
                       </a>
                     </b>
                   </h1>
@@ -33,7 +33,7 @@
 
         <div class="selectList-container">
             Seleccione el vehiculo:  
-            <select id="inputPlaca" class="selectList" onchange="getTaxiInfo(true)">
+            <select id="inputCarro" class="selectList" onchange="getcarroInfo(true)">
                 <option class="list-item" value="1">1</option>
                 <option class="list-item" value="2">2</option>
                 <option class="list-item" value="Todos">All</option>
@@ -53,8 +53,7 @@
             <label class="labels">Hora:</label>
             <label id="timeID" class="labelHome"></label>
 
-            <label class="labels">rpm:</label>
-            <label id="rpmID" class="labelHome"></label>
+
         </div>
         <div class="divHome">
             <label class="labels">Latitud2:</label>
@@ -70,8 +69,7 @@
             <label class="labels">Hora2:</label>
             <label id="timeID2"2 class="labelHome"></label>
 
-            <label class="labels">rpm:</label>
-            <label id="rpmID2" class="labelHome"></label>
+
         </div>
 
 
@@ -92,10 +90,8 @@
             }).addTo(map);
                       
         </script>
-        <script src="./showInfo.js"></script>
-        <script src="./selectList.js"></script>
+        <script src="./showinfo.js"></script>
+        <script src="./selector.js"></script>
     </body>
-    <div id="copyright">
-        Designed with love &hearts;
-    </div>
+
 </html>

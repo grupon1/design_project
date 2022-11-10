@@ -15,7 +15,7 @@ const deletePolyline = () => {
 }
 
 const showData = async (resetPolyline) => {
-    const carro = document.getElementById("inputcarro").value;  
+    const carro = document.getElementById("inputCarro").value;  
     fetch('/data?carro=${carro}', {
         method: 'GET',
         headers: {
