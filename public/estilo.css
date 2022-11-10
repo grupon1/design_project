@@ -59,8 +59,8 @@ header {
 
 .submitInput {
     padding: 10px 15px;
-    background-color: rgb(93, 94, 91);
-    color: rgb(210, 30, 30);
+    background-color: rgb(255, 255, 255);
+    color: rgb(246, 246, 246);
     border-radius: 5px;
     border: none;
     cursor: pointer;
@@ -96,6 +96,20 @@ header {
     align-items: center;
     justify-content: center;
     width: 700px;
+    padding: 15px;
+    flex-direction: column;
+    border-radius: 8px;
+    background-color: rgb(238, 238, 238);
+}
+.recordDiv1 {
+    border: 2px solid rgb(64, 65, 63);
+    display: flex;
+    margin: 0 auto;
+    margin-bottom:10px;
+    align-items: center;
+    justify-content: center;
+    width: 500px;
+    height: 190px;
     padding: 15px;
     flex-direction: column;
     border-radius: 8px;
