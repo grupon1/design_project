@@ -44,29 +44,31 @@ app.get("/historicosRango", (req, res) => {
 
 app.get("/data", async (req, res) => {
   const carro = req.query.carro;
-  if (carro === 'Todos' ) {
+  if (carro === 'Todos') {
     query = `SELECT * FROM disen ORDER BY ID DESC LIMIT 1`;
   } else {
-    query = `SELECT * FROM disen WHERE carro = "${carro}" ORDER BY ID DESC LIMIT 1`;
+    query = `SELECT * FROM disen WHERE driver = "${carro}" ORDER BY ID DESC LIMIT 1`;
   }
-  connection.query(query,(err,result) => {
+  connection.query(query, (err, result) => {
     if (!err) {
-      return res.send(result).status(200);     
+      return res.send(result).status(200);
     } else {
-        console.log(`Ha ocurrido el siguiente ${err}`);
-        return res.status(500);
-    };
+      console.log(`Ha ocurrido el siguiente ${err}`);
+      return res.status(500);
+    }
   });
 });
-
 
 app.get("/record", async (req, res) => {
   const idate = req.query.idate;
   const fdate = req.query.fdate;
-
+ 
+  console.log(idate); 
   const query = `SELECT * FROM disen WHERE date BETWEEN STR_TO_DATE( "${idate}" ,"%Y-%m-%d %H:%i:%s") AND STR_TO_DATE( "${fdate}" ,"%Y-%m-%d %H:%i:%s")`;
+  console.log(query);
   connection.query(query,(err, result) => {
     if (!err) {
+      console.log(results);
       return res.send(result).status(200);
     } else {
       console.log(`Ha ocurrido el siguiente ${err}`);
@@ -113,6 +115,7 @@ const insertData = async (info) => {
 
 
 const dgram = require('dgram');
+const { resourceUsage } = require("process");
 const socket = dgram.createSocket('udp4');
 socket.on('error', (err) => {
   console.log(`server error:\n${err.stack}`);
