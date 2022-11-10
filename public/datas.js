@@ -3,7 +3,7 @@ const latID = document.getElementById('latID');
 const longID = document.getElementById('longID');
 const dateID = document.getElementById('dateID');
 const timeID = document.getElementById('timeID');
-
+const carroID = document.getElementById('carroID');
 const polylineCoords =  [];
 
 
@@ -15,7 +15,7 @@ const deletePolyline = () => {
 }
 
 const showData = async (resetPolyline) => {
-    const carro = document.getElementById("inputcarro").value;  
+    const carro = document.getElementById("inputCarro").value;  
     fetch('/data?carro=${carro}', {
         method: 'GET',
         headers: {
@@ -56,4 +56,4 @@ showData();
 
 const timer = setInterval(() => {
     showData(); 
-}, 5000);
+}, 6000);

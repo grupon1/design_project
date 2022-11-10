@@ -9,25 +9,51 @@
         integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
         crossorigin=""/>
         <link rel="stylesheet" href="./estilo.css">
+        
     </head>
     <body>
         <header>
             <a href="/" class="links">Tiempo real</a>
-            <a href="/historicosRango" class="links" style="left: 166px;" >Consulta por rango</a>
             <div style="margin: 0 auto;" border-radius: 20px; background-color: rgba(255, 255, 255, 0); padding: 5px 15px">
                 <img src="/camion location.png" alt="Logo" height="80px">
             </div>
         </header>
 
-        <div class="recordDiv">
-            <div>
-                <label>Fecha inicial: </label>
-                <input class="dateInputs" type="datetime-local" id="idate">
-                <label>Fecha final: </label>
-                <input class="dateInputs" type="datetime-local" id="fdate" >            
+           <div class="forms" style="display: flex; justify-content: space-around;">
+            <div class="recordDiv">
+                <div style="margin-top : 20px">
+                    <label>Fecha inicial: </label>
+                    <input class="dateInputs" type="datetime-local" id="idate">
+                    <label>Fecha final: </label>
+                    <input class="dateInputs" type="datetime-local" id="fdate" >            
+                </div>                
+                <span style="margin-top : 5px">Radio del círculo:</span>
+                <input type="range" name="resize" id="resize" onchange="reSizeCircle(this)" max="10" value="5">
+                <input style="margin-top : 25px" class="submitInput" type="submit" value="Consultar" onclick=showRecordInfo()>
+                <br>
             </div>
-            <input class="submitInput" type="submit" value="Consultar" onclick=showRecordInfo()>
+
+            <div class="sliderMarker">
+                <div>
+                    <style>
+                        h4 {text-align: center;}
+                    </style>
+                    <h4>Movimiento sobre área</h4>
+                    <label>Mueva el marcador sobre la línea:</label>
+                    <br>
+                    <input type="range" id="rangeRed" min="1" max="10" value="1" onchange="setRangeRed(this)">
+                    <span style="color: red;">1</span>
+                    <br>
+                    <input type="range" id="rangeBlue" min="1" max="10" value="1" onchange="setRangeBlue(this)">
+                    <span style="color: blue">2</span>
+
+                    <div style="width:100%; margin-top: 20px; margin-bottom: 0px; display:flex; justify-content:center;">
+                        <button class="submitInput" onclick="searchRange()" style="cursor:pointer">Consultar</button>
+                    </div>
+                </div>
+            </div>
         </div>
+        
 
         <div id="map"></div>
 
@@ -46,6 +72,7 @@
             }).addTo(map);
                       
         </script>
-        <script src="./historico.js"></script>
+        <script src="./record.js"></script>
+        <script src="./fromrange.js"></script>
     </body>
 </html>

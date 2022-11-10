@@ -43,26 +43,32 @@ app.get("/historicosRango", (req, res) => {
 
 
 app.get("/data", async (req, res) => {
-  const vehiculo = req.query.carro;
-  const query = `SELECT * FROM disen WHERE driver = "${vehiculo}" ORDER BY ID DESC LIMIT 1`;
-  connection.query(query,(err,result) => {
+  const carro = req.query.carro;
+  if (carro === 'Todos') {
+    query = `SELECT * FROM disen ORDER BY ID DESC LIMIT 1`;
+  } else {
+    query = `SELECT * FROM disen WHERE carro = "${carro}" ORDER BY ID DESC LIMIT 1`;
+  }
+  connection.query(query, (err, result) => {
     if (!err) {
-      return res.send(result).status(200);     
+      return res.send(result).status(200);
     } else {
-        console.log(`Ha ocurrido el siguiente ${err}`);
-        return res.status(500);
-    };
+      console.log(`Ha ocurrido el siguiente ${err}`);
+      return res.status(500);
+    }
   });
 });
-
 
 app.get("/record", async (req, res) => {
   const idate = req.query.idate;
   const fdate = req.query.fdate;
-
+ 
+  console.log(idate); 
   const query = `SELECT * FROM disen WHERE date BETWEEN STR_TO_DATE( "${idate}" ,"%Y-%m-%d %H:%i:%s") AND STR_TO_DATE( "${fdate}" ,"%Y-%m-%d %H:%i:%s")`;
+  console.log(query);
   connection.query(query,(err, result) => {
     if (!err) {
+      console.log(result);
       return res.send(result).status(200);
     } else {
       console.log(`Ha ocurrido el siguiente ${err}`);
@@ -99,7 +105,7 @@ const insertData = async (info) => {
   const hour = info[3];
   const carro = info[4];
   const dateComplete = date + " " + hour;  
-  const query = `INSERT INTO disen (lat, lng, date) VALUES (${lat}, ${lng}, "${dateComplete}", "${carro})`;
+  const query = `INSERT INTO disen (lat, lng, date, carro) VALUES (${lat}, ${lng}, "${dateComplete}", ${carro})`;
   connection.query(query, function(err, result){
     if(err)throw err;
     console.log("Registro guardado exitosamente.")
@@ -109,6 +115,7 @@ const insertData = async (info) => {
 
 
 const dgram = require('dgram');
+const { resourceUsage } = require("process");
 const socket = dgram.createSocket('udp4');
 socket.on('error', (err) => {
   console.log(`server error:\n${err.stack}`);
