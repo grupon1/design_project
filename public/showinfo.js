@@ -98,7 +98,7 @@ const showData = async (carro,polylineVector,marker,polyline) => {
                 }
 
                 const carrooption = document.getElementById('inputCarro').value;
-                if (carrooption != 2) {
+                if (carrooption != 3) {
                     map.flyTo([lastInfo.lat,lastInfo.lng],13);
                     if (carro == '1') {
                         dateID2.textContent = '';
