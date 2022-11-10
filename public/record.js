@@ -1,6 +1,6 @@
 var hist1 = new Array();
 var hist2 = new Array();
-var map;
+
 var infoRed = new Array();
 var infoBlue = new Array();
 
