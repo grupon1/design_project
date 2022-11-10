@@ -15,7 +15,7 @@ const searchRange = () => {
     for(var point of hist1) {
       var isInCircleRadius = Math.abs(circleCenterPoint.distanceTo(point)) <= 1000
       if(isInCircleRadius) {
-        circleArrayRed.push({lat: point[0], lng: point[1], fecha: infoRed.fecha, hora: infoRed.hora});
+        circleArrayRed.push({lat: point[0], lng: point[1], fecha: infoRed.fecha});
       }
     }
   }
@@ -23,7 +23,7 @@ const searchRange = () => {
     for(var point of hist2) {
       var isInCircleRadius = Math.abs(circleCenterPoint.distanceTo(point)) <= 1000
       if(isInCircleRadius) {
-        circleArrayBlue.push({lat: point[0], lng: point[1], point, fecha: infoBlue.fecha, hora: infoBlue.hora});
+        circleArrayBlue.push({lat: point[0], lng: point[1], point, fecha: infoBlue.fecha});
       }
     }
   }
