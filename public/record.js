@@ -73,7 +73,7 @@ const showRecordInfo = async () => {
                 
                 // Se rellena el vector con la informacion obtenida de la base de datos  
                 for(var item of info) {
-                    if(item.driver == '1') {
+                    if(item.carro == '1') {
                         hist1.push([item.lat, item.lng]);
                         infoRed.push({
                             fecha: item.date.split('T')[0],
@@ -81,7 +81,7 @@ const showRecordInfo = async () => {
                             rpm: item.RPM
                         });
                     }
-                    if(item.driver == '2') {
+                    if(item.carro == '2') {
                         hist2.push([item.lat, item.lng]);
                         infoBlue.push({
                             fecha: item.date.split('T')[0],
