@@ -19,10 +19,10 @@ let polylineCoords2 =  [];
 // actualizando en tiempo real con la informacion de la base de datos.
 
 const polyline1 = L.polyline([[0,0]],{color:'red',opacity:1}).addTo(map);
-const marcador1 = L.marker([0, 0]).bindPopup('carro: 1');
+const marcador1 = L.marker([0, 0]).bindPopup('carro: #1');
 
 const polyline2 = L.polyline([[0,0]],{color:'blue',opacity:1}).addTo(map);
-const marcador2 = L.marker([0, 0], {Icon: RedIcon}).bindPopup('carro: 2');
+const marcador2 = L.marker([0, 0], {Icon: RedIcon}).bindPopup('carro: #2');
 
 var RedIcon = new L.Icon({
     iconUrl: 'public/marker-icon-red.png',
@@ -40,7 +40,7 @@ const deletePolyline = () => {
 const getcarroInfo = (resetPolyline) => {
     const vehi = document.getElementById('inputCarro').value;
     resetPolyline == true ? deletePolyline() : null
-    if (vehi == 2) {
+    if (vehi == 3) {
         marcador1.addTo(map)
         marcador2.addTo(map)
         showData('1',polylineCoords,marcador1,polyline1);

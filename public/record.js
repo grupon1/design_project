@@ -1,6 +1,6 @@
 var hist1 = new Array();
 var hist2 = new Array();
-
+var map;
 var infoRed = new Array();
 var infoBlue = new Array();
 
@@ -78,7 +78,7 @@ const showRecordInfo = async () => {
                         infoRed.push({
                             fecha: item.date.split('T')[0],
                             hora: item.date.split('T')[1],
-                            rpm: item.RPM
+
                         });
                     }
                     if(item.carro == '2') {
@@ -86,7 +86,7 @@ const showRecordInfo = async () => {
                         infoBlue.push({
                             fecha: item.date.split('T')[0],
                             hora: item.date.split('T')[1],
-                            rpm: item.RPM
+
                         });
                     }
                 }
