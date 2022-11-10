@@ -51,8 +51,8 @@ const showRecordInfo = async () => {
     // Se tienen que formatear porque por defecto traen la siguiente estructura, YYYY/MM/DDThh:mm:ss,
     // Entonces se elimina la T que separa la fecha y la hora, y se coloca un espacio, obteniendo 
     // la siguiente estructura YYYY/MM/DD hh:mm:ss
-    const idate = document.getElementById('idate').value; //.value.split('T').join(' ');
-    const fdate = document.getElementById('fdate').value; //.value.split('T').join(' ');
+    const idate = document.getElementById('idate').value.split('T').join(' ');
+    const fdate = document.getElementById('fdate').value.split('T').join(' ');
     
     // Se hace el fetch a la api con las fechas para obtener la informacion de la base de datos
     fetch(`/record?idate=${idate}&fdate=${fdate}`, {
